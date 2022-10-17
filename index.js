@@ -9,18 +9,15 @@ const app = express();
 // Configurar CORS
 app.use(cors());
 
+// Lectura y parseo del body
+app.use(express.json());
+
 // Base de datos
 dbConnection();
 
-//agylcode
-//agadmin
+app.use('/api/usuarios', require('./routes/usuarios'));
+app.use('/api/login', require('./routes/auth'));
 
-app.get('/', (req, res) => {
-    res.json({ 
-        message: 'Hello World!',
-        status: 'OK' 
-    });
-});
 
 app.listen(process.env.PORT, () => {
     console.log('Server is running on port ' + process.env.PORT);
